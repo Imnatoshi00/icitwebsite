@@ -1,0 +1,199 @@
+/* ============================================================
+   navbar.css — ICIT Site Header & Navigation
+   Link this in every page: <link rel="stylesheet" href="navbar.css"/>
+   ============================================================ */
+
+/* ── VARIABLES (shared with rest of site) ── */
+:root {
+  --cream:    #f5f0e8;
+  --ink:      #1a1510;
+  --warm-mid: #8b7355;
+  --gold:     #c9a84c;
+  --rust:     #b5451b;
+  --pale:     #ede8de;
+  --shadow:   rgba(26, 21, 16, 0.12);
+  --header-h: 72px;
+}
+
+/* ── HEADER WRAPPER ── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--cream);
+  border-bottom: 1px solid rgba(139, 115, 85, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: headerSlideDown 0.5s ease both;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-h);
+  padding: 0 5vw;
+  gap: 1.5rem;
+}
+
+/* ── LOGO ── */
+.logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-main {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.logo:hover .logo-main { color: var(--rust); }
+
+.logo-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--warm-mid);
+  margin-top: 3px;
+  white-space: nowrap;
+}
+
+/* ── NAV LINKS ── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--warm-mid);
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  position: relative;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+/* Hover state */
+.nav-link:hover {
+  color: var(--ink);
+  background: rgba(139, 115, 85, 0.08);
+}
+
+/* Active page indicator */
+.nav-link.active {
+  color: var(--ink);
+  font-weight: 600;
+}
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0.75rem;
+  right: 0.75rem;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+/* ── HAMBURGER (mobile toggle) ── */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  padding: 6px;
+  background: none;
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  border-radius: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+}
+.nav-toggle:hover { border-color: var(--ink); }
+
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hamburger → X when open */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width: 768px) {
+
+  .nav-toggle { display: flex; }
+
+  .site-nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--cream);
+    border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+    padding: 0.5rem 5vw 1rem;
+    box-shadow: 0 8px 24px var(--shadow);
+
+    /* Hidden by default */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+  }
+
+  .site-nav.open {
+    max-height: 400px;
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid rgba(139, 115, 85, 0.1);
+    border-radius: 0;
+    font-size: 0.82rem;
+  }
+  .nav-link:last-child { border-bottom: none; }
+
+  .nav-link.active::after {
+    display: none;
+  }
+  .nav-link.active {
+    color: var(--rust);
+    border-left: 3px solid var(--gold);
+    padding-left: calc(0.5rem + 3px);
+  }
+
+  .logo-sub { display: none; }
+}
+
+/* ── ENTRY ANIMATION ── */
+@keyframes headerSlideDown {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}

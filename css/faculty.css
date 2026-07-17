@@ -1,0 +1,123 @@
+:root {
+  --primary: #1a2a5e;
+  --dark: #c8a227;
+  --light: #eef1fa;
+}
+
+/* REMOVED: body override — was clashing with style.css */
+
+/* ================= PAGE TITLE ================= */
+.page-title {
+  text-align: center;
+  background: white;
+  padding: 40px 20px 30px;
+}
+
+.page-title h1 {
+  font-family: 'Merriweather', serif;
+  font-size: 34px;
+  color: #1a2a5e;
+  letter-spacing: 1px;
+}
+
+/* ================= SECTION ================= */
+.department {
+  padding: 50px 8%;
+}
+
+.department:nth-child(even) { background: white; }
+.department:nth-child(odd)  { background: var(--light); }
+
+.department h2 {
+  font-family: 'Merriweather', serif;
+  font-size: 26px;
+  color: var(--dark);
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.department h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: var(--primary);
+  margin-top: 10px;
+}
+
+/* ================= FACULTY GRID ================= */
+.faculty-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+/* ================= FACULTY CARD ================= */
+.faculty-card {
+  background: white;
+  padding: 24px 16px;   /* FIXED: was 50px — way too much */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.faculty-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* ================= FACULTY IMAGE ================= */
+.faculty-card img {
+  width: 160px;         /* FIXED: was 250px — too large */
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary);
+  margin-bottom: 14px;
+}
+
+/* ================= TEXT ================= */
+.faculty-card h3 {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.faculty-card p {
+  margin: 4px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.faculty-card strong { color: #000; }
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+  .department { padding: 30px 16px; }
+
+  .page-title { padding: 30px 16px 20px; }
+  .page-title h1 { font-size: 24px; }
+
+  .department h2 { font-size: 20px; }
+
+  .faculty-container {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+
+  .faculty-card {
+    padding: 16px 12px;
+  }
+
+  .faculty-card img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .faculty-card h3 { font-size: 14px; }
+  .faculty-card p  { font-size: 12px; }
+
+}
